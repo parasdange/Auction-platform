@@ -1,0 +1,38 @@
+{% extends 'categories_list.html' %}
+
+
+{% block 'table' %}
+	
+<h6 class=" m-0 p-2 table-primary" >CONTENT MANAGER</h6>
+
+<table class="table mb-0" style='text-align:center ' >
+	<tr style="background-color:#f2f2f2;" class="table-sm">
+		<th >#</th>
+		<th>Name</th>
+		<th>Category</th>
+		<th>Description</th>
+		<th>Price(Rs)</th>
+		<th>Feature Image</th>
+		<th>Closing Date</th>
+		<th>Options</th>
+
+	</tr>
+ 
+	{% for i in pobj %}
+
+	<tr style="font-weight:500; ">
+		<td class="py-5">{{i.s_no}}</td>
+		<td class="py-5">{{i.name}}</td>
+		<td class="py-5">{{i.cat_name}}</td>
+		<td class="py-3" style="text-align:left; ">{{i.des}}</td>
+		<td  class="py-5">{{i.price}}</td>
+		<td class="pt-2"><img src="{{i.cover_img.url}}" alt="Error.." width="150px" height="150px" /> </td>
+		<td class="py-5">{{i.closing_date}}<br/><span style="color:red;">{{i.pro_time}}</span><br/><span>{{i.pro_status}}</span></td>
+		<td class="py-5"><a href="{% url 'bidder:admin_delete_product' id=i.id %}" style="color:black;"><i class="fas fa-trash-restore-alt"></i></a></td>
+	</tr>
+
+	{% endfor %} 
+
+</table>
+
+{% endblock %}	

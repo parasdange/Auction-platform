@@ -1,0 +1,100 @@
+{% extends 'sellproduct.html' %}
+
+
+{% block 'sell_product'%}
+{% load staticfiles%}
+
+<div class="container ">
+	
+
+	<div class="row mt-md-5 mb-md-5">
+		<div class="col-md-12"  ><span id="Product_auction_head">Contact </span> <span id="Product_auction_head_1" >Us</span> </div>
+		{% if messages%}
+			<div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+ 				
+ 				{% for i in  messages %}
+
+ 				<strong>Success!</strong>{{i}} 
+
+ 				{% endfor %}
+ 				
+  					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    					<span aria-hidden="true">&times;</span>
+  					</button>
+			</div>
+		{% endif %}
+	</div>
+	
+<form  method="post" enctype="multipart/form-data">
+		{% csrf_token%}
+<div class="row mb-md-3">
+	<div class="col-md-4">
+		 <div class="form-group">
+           
+           <input style="background:#f2f2f2"  type="text" class="form-control" id="fn"  placeholder="Name*" required="" name="name">
+   
+       </div>
+	</div>
+	<div class="col-md-4">
+
+		<!-- <div class="row"> -->
+			<!-- <div class="col-md-6"> -->
+				
+				<div class="form-group">
+           			
+           			<input style="background: #f2f2f2"  type="email" class="form-control" id="fe"  placeholder="E-mail*" required="" name="email">
+   
+       			</div>
+
+			<!-- </div> -->
+
+			<!-- <div class="col-md-6">
+				
+
+				<div class="form-group">
+           			<label for="ap">Product Qty</label>
+           			<input style="background: #f2f2f2"  type="number" class="form-control" id="pq"  required="" name="p_qty">
+   
+       			</div>
+
+
+			</div> -->
+		<!-- </div> -->
+
+		
+		
+		
+	</div>
+	<div class="col-md-4">
+
+		
+		<div class="form-group">
+           			
+           			<input style="background: #f2f2f2"  type="text" class="form-control" id="fe"  placeholder="Telephone*" required="" name="mob">
+   
+       	</div>        				
+      
+		
+	</div>
+</div>
+	
+	<div class="row mb-md-3">
+		<div class="col-md-12">
+			<div class="form-group">
+    		
+    		<textarea style="background: #f2f2f2" class="form-control" id="des" rows="3" name="comment" placeholder="Comment*"></textarea>
+  		</div>
+		</div>
+	</div>
+	
+	
+	<div class="row mb-5">
+		<div class="col-md-12">
+			<button class="btn btn-dark text-light btn-lg p_sbtn" style="font-weight:bold; " type="submit">Submit</button>
+			
+		</div>
+	</div>
+</form>
+</div>
+
+{% endblock%}

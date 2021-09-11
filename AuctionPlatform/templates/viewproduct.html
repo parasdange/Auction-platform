@@ -1,0 +1,232 @@
+
+{% extends 'buy_product.html' %}
+{% load staticfiles %}
+
+{% block 'sell_product'%}
+
+<script>
+
+var obj_list=document.getElementsByClassName("mini_img")
+
+
+
+// var c_obj=document.getElementById("f_img")
+// console.log(c_obj.constructor.name)
+ // console.log(obj_list.length)
+//  console.log(obj_list.length)
+function Swap(obj){
+
+
+
+mobj=document.getElementById("main_img")
+
+
+// obj.src=mobj.src
+
+mobj.src=obj.src
+
+for (i in obj_list){
+
+	if(obj==obj_list[i]){
+		obj.style.border="3px solid #0275d8"
+	}else{
+
+		obj_list[i].style.border="0"
+	}
+}
+
+/*for (var i=0;i<obj_list.length;i++){
+ 	console.log(obj_list[i])
+	if(obj==obj_list[i]){
+		obj.style.border="5px solid lightblue"
+	}else{
+
+		obj.style.border="0px"
+	}
+}*/
+
+// obj.style.border="3px solid lightblue"
+
+
+
+	
+}
+	
+</script>
+
+<section class="pt-1 pb-5">
+            <div class="container px-4 px-lg-0 mt-0">
+
+                {% block 'bid_success_msg' %}
+
+               
+
+                 {% endblock %}
+
+
+            	<div class="row py-3 border-bottom mb-3" >
+            		<div class="col-md-6"><span style="font-size:30px;font-weight: bold; ">Bid</span><span style="font-size:30px;" class="text-secondary"> Now on "{{pobj.name}}"</span></div>
+            		<div class="col-md-6" id="date_container" ><span style="font-size:20px;" class="text-secondary">Closing Date :</span> <span style="font-family:sans-serif;font-size:20px; " class="text-secondary"> {{cdate}}</span></div>
+            	</div>
+
+                  <div class="row">
+            		<div class="col-md-5 p-0" style="text-align: center;display:inline-block;">
+
+                <div style="background-color:#f2f2f2 ">
+            		<div class="pl-5 pr-5 pt-2 pb-2">
+
+            			 <img id="main_img" class="card-img-top" src="{{pobj.cover_img.url}}" alt="..."  style="width:300px;height:350px;"/>
+
+            		</div>
+            			 <div  style="text-align:center;background-color:#d3d3d3;" class="p-2 ">
+            			 	<!-- <img onclick="Swap(this)" src="{{pobj.cover_img.url}}" style="display:inline-block;width:60px;height:80px;border:2px solid red;" class="ml-1"> -->
+            			 	 <img  class=" p-1 mini_img" onclick="Swap(this)" id="f_img"  src="{{pobj.cover_img.url}}" alt="..."  style="display:inline-block;"/>
+
+            			 	 <script>
+            			 	 	var fobj=document.getElementById("f_img")
+            			 	 	fobj.style.border="3px solid #0275d8"
+
+            			 	 </script>
+
+            			 	{% for i in p_img%}
+
+            			 		<img onclick="Swap(this)"  src="{{i.product_images.url}}" style="display:inline-block;" class="p-1 mini_img">
+            			 	{% endfor %}
+            			 </div>
+                </div>         
+
+            		</div>
+            		<div class="col-md-4 pl-lg-3">
+            			<h4 class="mb-3" style="font-family:Arial; ">Discription</h4>
+            			<p style="text-align:justify; ">{{pobj.des}}</p>
+            		</div>
+            		<div class="col-md-3 pl-lg-5">
+            			<h4 style="font-family:Arial;" >Auction Details</h4>
+        			<div class="my-4">
+        				<span class="text-warning mr-4 " style="display:inline-block;font-size:20px;font-weight: bold;  "> > </span><span style="display:inline-block; " class="mr-2"><i class="fa fa-user p-2" style="font-size:17px;color:white;background-color:gray;border-radius:8px; "></i></span><span style="display:inline-block; ">{{uname}}</span>
+        			</div>
+
+        			<div class="my-4">
+        				<span class="text-warning mr-4" style="display:inline-block;font-size:20px;font-weight: bold; "> > </span><span style="display:inline-block; " class="mr-2"><i class="fa fa-map-marker p-2" style="font-size:17px;color:white;background-color:gray;border-radius:8px; "></i></span><span style="display:inline-block; ">{{pobj.city}}</span>
+        			</div>
+
+        			<div class="my-4">
+        				<span class="text-warning mr-4" style="display:inline-block;font-size:20px;font-weight: bold; "> > </span><span style="display:inline-block; " class="mr-2"><i class=" p-2" style="font-size:17px;color:white;background-color:gray;border-radius:8px; " >0</i></span><span style="display:inline-block; ">Number of bids</span>
+        			</div>
+
+        			<div class="my-4">
+        				<span class="text-warning mr-4" style="display:inline-block;font-size:20px;font-weight: bold; "> > </span><span style="display:inline-block; " class="mr-2"><i class=" p-1" style="font-size:17px;color:white;background-color:gray;border-radius:8px; ">Rs {{pobj.price}}</i><span id="p_price" style="display:none">{{pobj.price}}</span></span><span style="display:inline-block; ">Actual price</span>
+        			</div>
+        			<div class="my-4">
+        				<span class="text-warning mr-4" style="display:inline-block;font-size:20px;font-weight: bold; "> > </span><span style="display:inline-block; " class="mr-2"><i class=" p-1" style="font-size:17px;color:white;background-color:gray;border-radius:8px; ">{{r_time}} Hrs</i></span><span style="display:inline-block; ">Time Remaning</span>
+        			</div>
+                    {%  block 'remove_msg' %}
+        			<script type="text/javascript">
+
+
+        				
+            			function Bidform(id){
+            				ob=document.getElementById(id)
+            				ob.style.display="block"
+            			}
+        			</script>
+                  {% endblock%}
+
+        			
+        			<div class="mt-4 pt-lg-4">
+
+                    {%block 'update_btn'%}
+
+
+        				<button type="button" class="btn btn-dark text-light own_product" style="font-size:18px;font-weight: bold; " onclick="Bidform('bid_form')">Bid Now Right Now &nbsp;<span class="text-warning" >> </span></button>
+
+                    {% endblock %}
+
+
+            		</div>
+            		<div style="background-color:#CCFFFF;" class="p-2 own_product" id="bid_form">
+
+                        {% block 'update_form'%}
+            			<form method="post" >
+                           
+
+                            {% csrf_token %}
+
+            				<div class="form-group mb-1">
+            					<small style="display:block;text-align:center; ">Add your price(Rs) and submit .</small>
+            					<input type="number" class="form-control" name="bid_amount" id="bid_amount">
+                                <small class="mb-1" id="b_error" style="display:block;text-align: center; "></small>
+            				</div>
+
+            				<div class="form-group" style="text-align:center;">
+            					<input type="submit" value="Submit" class="btn btn-primary text-light" onclick="return Bidvalidation('bid_amount')">
+            					<input type="reset" value="Reset" class="btn btn-primary text-light">
+            				</div>
+            				
+            			</form>
+                        {% endblock %}
+            		</div>
+
+            		<script type="text/javascript">
+            			var obj=document.getElementById("bid_form")
+            			obj.style.display="none";
+
+                        function Bidvalidation(id){
+
+                            var p_price=document.getElementById('p_price').innerHTML
+
+                            var bobj=document.getElementById(id).value
+
+                            var eobj=document.getElementById("b_error")
+
+                            console.log(parseInt(p_price))
+
+                            console.log(parseInt(bobj))
+
+
+                            if (parseInt(bobj) < parseInt(p_price)){
+
+                                eobj.innerHTML="Please enter valid amount !"
+
+                                eobj.style.color="red"
+
+                                return false
+                            }
+
+                           return true 
+
+                        }
+
+            		</script>
+
+                {%block 'update_bid' %}
+            		{% if messages%}
+					
+ 				
+ 					{% for i in  messages %}
+
+ 					<script>
+ 						var obj=document.getElementsByClassName("own_product")
+
+ 						for (i in obj){
+
+ 							obj[i].style.display="none"
+
+ 						}
+ 						
+ 					</script>
+
+ 						<h6 class="text-danger pl-lg-5" style="text-align:center;font-weight:bold;">{{i}}</h6>	
+
+ 					{% endfor %}
+
+ 					{%endif%}
+
+                {% endblock %}    
+
+
+            	</div>
+            </div>
+</section>
+
+{% endblock %}

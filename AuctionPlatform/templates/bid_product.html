@@ -1,0 +1,91 @@
+{% extends 'viewproduct.html' %}
+{% load staticfiles %}
+
+
+  {% block 'bid_success_msg' %}
+
+                {% if messages%}
+                <div class="alert alert-success alert-dismissible fade show mt-5 remove_msg" role="alert">
+                
+                    {% for i in  messages %}
+
+                    <strong>Success! </strong>{{i}} 
+
+                    {% endfor %}
+                
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            {% endif %}
+
+{% endblock %}
+
+
+ {%block 'update_bid' %}
+            		{% if messages%}
+					
+ 				
+ 					{% for i in  messages %}
+
+ 				<!-- 	<script>
+ 						var obj=document.getElementsByClassName("own_product")
+
+ 						// for (i in obj){
+
+ 						// 	obj[i].style.display="none"
+
+ 						// }
+ 						
+ 					</script> -->
+
+ 						<h6 class="text-success pl-lg-4 py-lg-3 pr-lg-5  remove_msg" style="text-align:center;font-weight:bold;">You have placed bid successfully with price.(Rs.{{bidding_amount}}) </h6>	
+
+ 					{% endfor %}
+
+ 					{%endif%}
+                    
+{% endblock %}  
+
+{%block 'update_btn'%}
+
+
+        				<button type="button" class="btn btn-dark text-light " style="font-size:18px;font-weight: bold;display:inline-block;  " onclick="Bidform('bid_form')">Update Price Now &nbsp;<span class="text-warning" >> </span></button>
+
+{% endblock %}  
+
+ {% block 'update_form'%}
+            			<form method="post"  action="{% url 'bidder:bid_update' id=pobj.id%}">
+                           
+
+                            {% csrf_token %}
+
+            				<div class="form-group mb-1">
+            					<small style="display:block;text-align:center; ">Add your price(Rs) and submit .</small>
+            					<input type="number" class="form-control" name="bid_amount">
+            				</div>
+
+            				<div class="form-group" style="text-align:center;">
+            					<input type="submit" value="Submit" class="btn btn-primary text-light">
+            					<input type="reset" value="Reset" class="btn btn-primary text-light">
+            				</div>
+            				
+            			</form>
+ {% endblock %}
+
+   {%  block 'remove_msg' %}
+        			<script type="text/javascript">
+
+
+        				
+            			function Bidform(id){
+            				ob=document.getElementById(id)
+            				ob.style.display="block"
+            				removeobj=document.getElementsByClassName("remove_msg")
+
+            				for(i in removeobj){
+            					removeobj[i].style.display="none"
+            				}
+            			}
+        			</script>
+   {% endblock%}

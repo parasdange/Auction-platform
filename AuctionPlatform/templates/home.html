@@ -1,0 +1,111 @@
+{% extends 'index.html'%}
+{% load staticfiles %}
+
+{% block 'card' %}
+{% for i in pobj %}
+
+ <div class="col mb-5">
+        <div class="card h-100 border-0 over">
+        					<!-- Product Closing time-->
+        					<div style="text-align:center;" class="p-3"><span class="p-1" style="font-weight:300;background-color:lightgray;font-size:20px;font-family:sans-serif;display: inline-block;   ">{{i.closing_date}}</span></div>
+                            <!-- Product image-->
+                            <img class="card-img-top " id="zoom" src="{{ i.cover_img.url }}" alt="Not Found" style="width:100%;height:200px;  " />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h3  style="font-weight: bold;font-family:monospace; "><sup>Rs</sup>{{i.price}}</h3>
+                                    <!-- Product price-->
+                                   <span style="font-weight:400; "> {{i.name}} </span>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-warning mt-auto" href="/login/">submit  a bid</a></div>
+                            </div>
+         </div>
+  </div>
+
+{% endfor %}
+{% endblock %}
+
+{% block 'nav' %}
+
+
+ <div class="bg-light py-lg-3">
+   
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <div class="container px-4 px-lg-5 ">
+                <a class="navbar-brand" href="#!"><img id="logo_img" src="{% static 'index/assets/auction6.png'%}" class="bg-warning" width="60px" height="60px"><span class="logo_content"> Online Auction Sytem</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto  mb-2 mb-lg-0 ">
+                        <li class="nav-item "><a  class="nav-link n-link"  href="/home/">Home</a></li>
+                         <li class="nav-item "><a  class="nav-link n-link"  href="#about">About</a></li>
+                        <li class="nav-item "><a class="nav-link n-link" href="/login/">Sell</a></li>
+                        <li class="nav-item "><a class="nav-link n-link" href="/login/">Buy</a></li>
+                        <li class="nav-item "><a class="nav-link n-link" href="/login/">Search</a></li>
+                        <li class="nav-item"><a class="nav-link " href="#!">Contact Us</a></li>
+                       
+                    </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+    </div>
+
+{% endblock %}
+
+ {% block 'auction_head' %}
+<div class="row mb-3">
+	<div class="col"><span style="font-size:40px;font-weight:bold;">Current</span><span style="font-size:40px;font-weight:200;"> Auction</span></div>
+	
+</div>
+
+ {% endblock %}
+
+
+  {% block 'finis_auction' %}
+
+  <div class="row mb-3">
+    <div class="col"><span style="font-size:40px;font-weight:bold;">Finished</span><span style="font-size:40px;font-weight:200;"> Auction</span></div>
+    
+</div>
+
+<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >
+
+    {% for i in sobj %}
+
+ <div class="col mb-5">
+        <div class="card h-100 border-0 over">
+                            <!-- Product Closing time-->
+                          
+                           <div class="badge bg-warning  rounded text-light position-absolute" style="top: 0.5rem; right: 0.5rem; "><span style="font-weight:bold;font-size:20px;color:black;font-family:cursive; ; "><sup>Rs&nbsp;</sup>{{i.final_price}}</span></div>
+
+                            <!-- Product image-->
+                            <img class="card-img-top " id="zoom" src="{{ i.cover_img.url }}" alt="Not Found" style="width:100%;height:200px;  " />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                  <!--   <h3  style="font-weight: bold;font-family:monospace; "><sup>Rs</sup>{{i.price}}</h3> -->
+                                    <!-- Product price-->
+                                   <span style="font-weight:500;font-size:20px;  "> {{i.name}} </span>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                          <!--   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-warning mt-auto" href="/login/">submit  a bid</a></div>
+                            </div> -->
+         </div>
+  </div>
+
+{% endfor %}
+    
+
+
+</div>
+
+
+    {% endblock %}

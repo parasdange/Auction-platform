@@ -1,0 +1,288 @@
+{% extends 'sellproduct.html' %}
+
+{% load staticfiles %}
+
+ {% block 'boot'%}
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+ 
+ {% endblock %}
+
+{% block 'sell_product'%}
+{% load staticfiles%}
+
+<div class="container ">
+	
+
+	<div class="row mt-md-5 mb-md-5">
+		<div class="col-md-12"  ><span id="Product_auction_head">Update User</span> <span id="Product_auction_head_1" >Account</span> </div>
+		{% if messages%}
+			<div class="alert alert-success alert-dismissible fade show mt-5 " role="alert">
+ 				
+ 				{% for i in  messages %}
+
+ 				<strong>Success!</strong>{{i}} 
+
+ 				{% endfor %}
+ 				
+  					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    					<span aria-hidden="true">&times;</span>
+  					</button>
+			</div>
+		{% endif %}
+	</div>
+	
+<form  method="post" enctype="multipart/form-data" >
+		{% csrf_token%}
+<div class="row mb-md-3">
+	<div class="col-md-4">
+		 <div class="form-group">
+           <label for="fn">First Name</label>
+           <input style="background: #f2f2f2 "  type="text" class="form-control" id="fn"  value="{{uobj.first_name}}" required="" name="first_name">
+   
+       </div>
+	</div>
+	<div class="col-md-4">
+
+		<div class="form-group">
+           			<label for="ln">Last Name</label>
+           			<input style="background: #f2f2f2 "  value="{{uobj.last_name}}"  type="text" class="form-control" id="ln"  required="" name="last_name">
+   
+       	</div>
+		
+		
+	</div>
+	<div class="col-md-4">
+
+		<div class="form-group">
+           				<label for="un">Username</label>
+           				<input style="background: #f2f2f2 " type="text" value="{{uobj.username}}"  class="form-control" id="un"  required="" name="user_name">
+   
+       </div>
+		
+	</div>
+</div>
+	<div class="row mb-md-3">
+	<div class="col-md-4">
+		
+					<div class="form-group">
+           				<label for="mn">Mobile Number</label>
+           				<input style="background: #f2f2f2 " type="text" value="{{u_info_obj.mobile}}"  class="form-control" id="mn"  required="" name="mob">
+   
+       				</div>
+	</div>
+	<div class="col-md-4">
+
+		<div class="form-group">
+           				<label for="up">Password</label>
+           				<input  style="background: #f2f2f2 " value="{{u_info_obj.password}}"   type="password" class="form-control" id="up"  required="" name="password">   
+     	</div>
+		
+					
+	</div>
+
+	<div class="col-md-4">
+
+		<div class="form-group">
+           				<label for="ue">Email</label>
+           				<input  style="background: #f2f2f2 " value="{{uobj.email}}"   type="email" class="form-control" id="ue"  required="" name="email">   
+     	</div>
+		
+					
+	</div>
+
+	
+	</div>
+	<div class="row mb-md-3">
+		<div class="col-md-12">
+			<div class="form-group">
+    		<label for="address">Address</label>
+    		<input style="background:#f2f2f2;height:80px;  " class="form-control" id="address" value="{{u_info_obj.address}}"   name="address" placeholder="Address........">
+  		</div>
+		</div>
+	</div>
+	
+	<div class="row mb-5">
+		<div class="col-md-12">
+			<button class="btn btn-dark text-light btn-lg p_sbtn" type="submit">Update Account</button>
+			<button class="btn btn-dark text-light btn-lg p_sbtn" type="reset">Reset</button>
+		</div>
+	</div>
+</form>
+
+	<div class="row mt-md-5 mb-md-0">
+		<div class="col-md-12"  ><span id="Product_auction_head">User Account </span> <span id="Product_auction_head_1" >Purchesh History</span> </div>
+		
+	</div>
+
+	<div class="row mt-md-5 mb-md-5">
+
+		<div class="col-md-12">
+
+			<table class="table  table-bordered table-sm text-sec" style="text-align:center; ">
+  				
+   					 <tr style="background-color:#f2f2f2;font-weight: bold; " class="text-secondary">
+      					<td >S.no</td>
+      					<td>Name / Title</td>
+					      <td>Bid Price(Rs)</td>
+					      <td>Closing date</td>
+					      <td>Status</td>
+    				</tr>
+  			
+			 {% for i in pobj %}
+			    <tr style="font-family: serif; ">
+			      <td>{{i.s_no}}</td>
+			      <td><a href="{% url 'bidder:view_product' id=i.id %}" class="b_product">{{i.name}}</a></td>
+			      <td>{{i.bid_amt}}</td>
+			      <td>{{i.closing_date}}</td>
+			      <td><a href="{% url 'bidder:win_proceed' id=i.bid_id %}" class="win_product ">{{i.status}}</a></td>
+			    </tr>
+			{% endfor%}
+			  
+			</table>
+			<script>
+				var win_obj=document.getElementsByClassName("win_product")
+
+				for(i in win_obj){
+					if (win_obj[i].innerHTML=="Waiting"){
+
+						win_obj[i].href="#"
+						win_obj[i].style.color="black"
+					}else if (win_obj[i].innerHTML=="Buy Successfully(Cash On Delivery)"){
+
+						win_obj[i].href="#"
+						win_obj[i].style.color="black"
+					}
+					else{
+						win_obj[i].style.color="green"
+
+					}
+				}
+
+			</script>
+		</div>
+
+	</div>
+
+	<div class="row mt-md-5 mb-md-0">
+		<div class="col-md-12"  ><span id="Product_auction_head">User Account </span> <span id="Product_auction_head_1" >Sale History</span> </div>
+		
+	</div>
+
+	<div class="row mt-md-5 mb-md-5">
+
+		<div class="col-md-12">
+
+			<script>
+				function Bidshow(class_name){
+					var obj=document.getElementsByClassName(class_name);
+
+					
+					for (i in obj){
+
+						obj[i].style.display="table-row";
+
+					}
+
+
+				}
+
+
+			</script>
+
+
+			{% for i in p_obj %}
+
+			<table class="table   text-seconadry" >
+
+  				
+   					 <tr style="background-color:#f2f2f2; " class="text-secondary border-1">
+
+   					 	<td colspan="5" ><div style="font-weight:500; ">{{i.Sno}}.&nbsp;&nbsp; {{i.name}} &nbsp;&nbsp; Rs. {{i.price}}&nbsp;&nbsp;  {{i.closing_date}}&nbsp;&nbsp; Number of bids({{i.num_of_bid}})   &nbsp;&nbsp;<span class="text-danger">{{i.product_status}}</span> <button onclick="Bidshow('{{i.Sno}}')" class="btn btn-sm btn-primary" style="font-weight:bold;float:right; ">view bid</button></div></td>
+      					
+    				</tr>
+
+    				
+    				 <tr style="font-weight:bold; text-align:center;display:none; "  class="text-secondary table-bordered table-sm {{i.Sno}}">
+      					<td >S.no</td>
+      					<td >User Name</td>
+					      <td >Phone</td>
+
+					     
+					      <td>Bid Price(Rs)</td>
+					      <td >Status</td>
+    				</tr>
+
+    				{% for k in i.product_bid %}
+
+    				 <tr style=" text-align:center; font-family: serif;display:none; "  class="text-secondary table-bordered table-sm {{i.Sno}}">
+      					<td >{{k.sn}}</td>
+      					<td >{{k.fullname}}</td>
+					      <td >{{k.mobile}}</td>
+
+					     
+					      <td>{{k.bid_amount}}</td>
+					      <td><a  href="{% url 'bidder:bid_approve'  id=k.id %}" class="pro_approve">{{k.status}}</a></td>
+    				</tr>
+
+    					
+
+
+    				{% endfor %}
+  			
+			
+			</table>
+			{% endfor %}
+
+			<script type="text/javascript">
+
+				var obj1=document.getElementsByClassName('pro_approve')
+
+				for (i in obj1){
+
+
+						if (obj1[i].innerHTML =="Sold Successfully"){
+							
+							obj1[i].style.color="black"
+
+							obj1[i].href="#"
+						}
+
+					}
+								
+			</script>
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+
+{% endblock%}
+
+ {% block 'nav'%}  
+     <div class="bg-light py-lg-3 mb-3" style="box-shadow: 10px 10px 20px lightgray">   
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <div class="container px-4 px-lg-5 ">
+                <a class="navbar-brand" href="#!"><img id="logo_img" src="{% static 'index/assets/auction6.png'%}" class="bg-warning" width="60px" height="60px"><span class="logo_content"> Online Auction Sytem</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto  mb-2 mb-lg-0 ">
+                        <li class="nav-item "><a  class="nav-link n-link"  href="/userdashboard/">Home</a></li>
+                         <li class="nav-item "><a  class="nav-link n-link"  href="#about">About</a></li>
+                        <li class="nav-item "><a class="nav-link n-link" href="/seller/sellproduct/">Sell</a></li>
+                        <li class="nav-item "><a class="nav-link n-link" href="/bidder/buy_product/">Buy</a></li>
+                        <li class="nav-item "><a class="nav-link n-link" href="/seller/search/">Search</a></li>
+                        <li class="nav-item"><a class="nav-link " href="#!">Contact Us</a></li>
+                       
+                    </ul>
+                    
+                </div>
+            </div>
+        </nav>
+         </div>
+        {% endblock%}

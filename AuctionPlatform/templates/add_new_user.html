@@ -1,0 +1,95 @@
+{% extends 'admin.html'%}
+
+{% load staticfiles %}
+
+
+ {% block 'content' %}
+
+ {% if messages %}
+
+{% for i in messages %}
+
+<div class="alert alert-success alert-dismissible fade show mb-2 mt-1 ml-5 mr-5  pl-3" role="alert">
+  <strong>Success !</strong>{{i}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+<h6 class=" border border-primary rounded p-2  pl-3 table-primary mb-0 mt-1 ml-5 mr-5" >Add New User</h6>
+ <div class="p-5 border rounded  ml-5 mr-5 mb-5 border-primary ">
+ 	
+ 	<form action="#" method="post">
+                   {%  csrf_token %}
+                   <div class="form-group">
+
+                   			<input  type="text" name="first_name" placeholder="First Name" required="" class="form-control">
+                   	
+                   </div>
+
+
+                    <div class="form-group">
+
+                    	 <input type="text" name="last_name" placeholder="Last Name" required="" class="form-control">
+                   </div>
+
+                   <div class="form-group">
+                   	
+                   		<input  type="text" name="user_name" placeholder="Username" required="" class="form-control">
+
+                   </div>
+
+                   <div class="form-group">
+
+                   	<input  type="email" name="email" placeholder="Example1311@gmail.com" required="" class="form-control">
+                   	
+
+                   </div>
+                   
+
+                   <div class="form-group">
+
+                   	<input  type="password" name="password" placeholder="Password" required="" class="form-control">
+                   	
+                   </div>
+
+                    <div class="form-group">
+
+                    	<input  type="text" name="mob" placeholder="Mobile Number" required="" class="form-control">
+
+                  
+                   	
+                   </div>
+                  
+					
+					
+					<div class="form-group">
+						
+						<input  type="text" name="address" placeholder="Address" required="" class="form-control">
+
+					</div>
+
+					<div class="form-group">
+
+						<input type="submit" value="Submit"  class="btn btn-primary">
+
+						<input type="reset" value="Reset"  class="btn btn-primary">
+						
+						
+					</div>
+					
+          			
+                   
+				
+					
+	</form>
+ </div>
+
+ {% endblock%}
+
+
+ 

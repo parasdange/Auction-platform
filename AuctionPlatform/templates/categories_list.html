@@ -1,0 +1,51 @@
+{% extends 'admin.html' %}
+
+ {% block 'content' %}
+
+
+ {% if messages %}
+
+{% for i in messages %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Success !</strong>{{i}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+
+<div class="border rounded ">
+ 
+ {% block 'table' %}
+	
+<h6 class=" m-0 px-3 py-2 table-primary" >CONTENT MANAGER</h6>
+
+<table class="table mb-0" style='text-align:center '>
+	<tr style="background-color:#f2f2f2;" class="table-sm">
+		<th >#</th>
+		<th>Name</th>
+		<th>Options</th>
+	</tr>
+
+	{% for i in cobj %}
+
+	<tr>
+		<td >{{i.s_no}}</td>
+		<td>{{i.catname}}</td>
+		<td><a href="{% url 'bidder:category_edit' id=i.id %}" style="color:black;display:inline-block;" class='mr-5'><i class="fas fa-pencil-alt"></i></a><a href="{% url 'bidder:category_delete' id=i.id %}" style="color:black;"><i class="fas fa-trash-restore-alt"></i></a></td>
+	</tr>
+
+	{% endfor %}
+</table>
+
+{% endblock %}	
+
+</div>
+                     
+ {% endblock%}
+ 

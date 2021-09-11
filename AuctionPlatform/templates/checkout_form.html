@@ -1,0 +1,70 @@
+{% extends 'sellproduct.html' %}
+{% load staticfiles %}
+
+{% block 'sell_product'%}
+
+
+<div class="container ">
+	
+
+	<div class="row mt-md-5 mb-md-3">
+		<div class="col-md-12"  ><span id="Product_auction_head">Checkout</span> <span id="Product_auction_head_1" >Now</span> </div>
+		
+	</div>
+	<form method="post" >
+		{% csrf_token %}
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<label>Product Name</label>
+					<input type="text" name="p_name" value="{{bobj.product_name}}" readonly=""  class="form-control" style="background-color:#f2f2f2 ">
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label>Product Price(Rs.)</label>
+					<input type="number" name="p_price"  value="{{bobj.bid_amount}}" readonly=""   class="form-control"  style="background-color:#f2f2f2 ">
+				</div>
+				
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label>Select Payment Method</label>
+					<select name="pyment_method" class="form-control">
+						<option value="0" >select payment method</option>
+						{% for i in  mobj%}
+						<option value="{{i.method}}" >{{i.method}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				
+			</div>
+		</div>
+		<div class="row">
+
+			<div class="col-md-12 ">
+				<div class="form-group">
+					<label>Shipping Address</label>
+					<input type="text" name="shipping_address" value="{{bobj.shipping_address}}" class="form-control" style="height:80px;background-color:#f2f2f2; ">
+				</div>	
+			</div>
+			
+		</div>
+
+		<div class="row mb-md-5 mt-md-4">
+
+			<div class="col-md-12">
+				<button class="btn btn-dark text-light btn-lg" type="submit">Submit</button>
+				<button class="btn btn-dark text-light btn-lg" type="Reset">Reset</button>
+			</div>
+			
+		</div>
+
+	
+
+	</form>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,209 @@
+{% extends 'userdashboard.html' %}
+
+{% load staticfiles %}
+
+ {% block 'boot'%}
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+ 
+ {% endblock %}
+
+{% block 'sell_product'%}
+{% load staticfiles%}
+
+<div class="container ">
+	
+
+	<div class="row mt-md-5 mb-md-5">
+		<div class="col-md-12"  ><span id="Product_auction_head">Add new</span> <span id="Product_auction_head_1" >Auction</span> </div>
+		{% if messages%}
+			<div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+ 				
+ 				{% for i in  messages %}
+
+ 				<strong>Success!</strong>{{i}} 
+
+ 				{% endfor %}
+ 				
+  					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    					<span aria-hidden="true">&times;</span>
+  					</button>
+			</div>
+		{% endif %}
+	</div>
+	
+<form  method="post" enctype="multipart/form-data">
+		{% csrf_token%}
+<div class="row mb-md-3">
+	<div class="col-md-4">
+		 <div class="form-group">
+           <label for="pn">Product Name</label>
+           <input style="background:#f2f2f2"  type="text" class="form-control" id="pn"  required="" name="p_name">
+   
+       </div>
+	</div>
+	<div class="col-md-4">
+
+		<!-- <div class="row"> -->
+			<!-- <div class="col-md-6"> -->
+				
+				<div class="form-group">
+           			<label for="ap">Auction Product Price(Rs)</label>
+           			<input style="background: #f2f2f2"  type="number" class="form-control" id="pp"  required="" name="p_price">
+   
+       			</div>
+
+			<!-- </div> -->
+
+			<!-- <div class="col-md-6">
+				
+
+				<div class="form-group">
+           			<label for="ap">Product Qty</label>
+           			<input style="background: #f2f2f2"  type="number" class="form-control" id="pq"  required="" name="p_qty">
+   
+       			</div>
+
+
+			</div> -->
+		<!-- </div> -->
+
+		
+		
+		
+	</div>
+	<div class="col-md-4">
+
+		<div class="form-group">
+           				<label for="uc">Select Category</label>
+           				<select id="uc" class="form-control" name="cat_id" required=""  >
+           					<option value="0">select category</option>
+           					{% for i in cobj%}
+           						<option value="{{i.id}}">{{i.catname}}</option>
+
+           					{% endfor%}
+           				</select>           				
+      	</div>
+		
+	</div>
+</div>
+	<div class="row mb-md-3">
+	<div class="col-md-4">
+		
+					<div class="form-group">
+           				<label for="cd">Auction Closing Date</label>
+           				<input  type="date" class="form-control" id="cd"  required="" name="p_date">
+           				<small id="d_error"></small>
+   
+       				</div>
+	</div>
+	<div class="col-md-4">
+
+		<div class="form-group">
+           				<label for="uc">City</label>
+           				<select id="uc" class="form-control" name="p_city" required=""  >
+           					<option value="0">select city</option>
+           					{% for i in city_obj%}
+           						<option value="{{i.city}}">{{i.city}}</option>
+
+           					{% endfor%}
+           				</select>           				
+      	</div>
+		
+					
+	</div>
+	<div class="col-md-4">
+			<div class="form-group">
+           				<label for="pp">Product Cover Photo</label>
+           				<input type="file" class="form-control" id="pi"  required="" name="p_img">   
+     	</div>
+		
+		
+		
+					
+	</div>
+	</div>
+	<div class="row mb-md-3">
+		<div class="col-md-12">
+			<div class="form-group">
+    		<label for="des">Description</label>
+    		<textarea style="background: #f2f2f2" class="form-control" id="des" rows="3" name="p_des" placeholder="Description........" required=""></textarea>
+  		</div>
+		</div>
+	</div>
+	<div class="row mb-md-3">
+		<div class="col-md-12">
+			<div class="form-group">
+           				<label for="pp">Click to add gallery images</label>
+           				<input type="file" class="form-control" id="pi" multiple=""  required="" name="p_imgs">   
+     	</div>
+		</div>
+	</div>
+	
+	<div class="row mb-5">
+		<div class="col-md-12">
+			<button class="btn btn-dark text-light btn-lg p_sbtn" onclick="return Add_product('cd')" type="submit">Submit</button>
+			<button class="btn btn-dark text-light btn-lg p_sbtn" type="reset">Reset</button>
+		</div>
+
+		<script type="text/javascript">
+			
+			function Add_product(id){
+
+				var current_date=new Date()
+
+				var date=document.getElementById(id).value.split("-")
+
+				var eobj=document.getElementById('d_error')
+
+				var m=parseInt(date[1])-1
+				var y=parseInt(date[0])
+				var d=parseInt(date[2])
+
+				var enter_date=new Date(y,m,d)
+
+
+			
+				if(enter_date<current_date){
+
+					eobj.innerHTML="Please enter valid date !"
+					eobj.style.color="red"
+
+					return false
+
+				}
+
+				return true;
+
+			}
+
+		</script>
+	</div>
+</form>
+</div>
+
+{% endblock%}
+
+ {% block 'nav'%}  
+     <div class="bg-light py-lg-3 mb-3" style="box-shadow: 10px 10px 20px lightgray">   
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <div class="container px-4 px-lg-5 ">
+                <a class="navbar-brand" href="#!"><img id="logo_img" src="{% static 'index/assets/auction6.png'%}" class="bg-warning" width="60px" height="60px"><span class="logo_content"> Online Auction Sytem</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto  mb-2 mb-lg-0 ">
+                        <li class="nav-item "><a  class="nav-link n-link"  href="/userdashboard/">Home</a></li>
+                         <li class="nav-item "><a  class="nav-link n-link"  href="#about">About</a></li>
+                        <li class="nav-item "><a class="nav-link n-link" href="/seller/sellproduct/">Sell</a></li>
+                        <li class="nav-item "><a class="nav-link n-link" href="/bidder/buy_product/">Buy</a></li>
+                        <li class="nav-item "><a class="nav-link n-link" href="/seller/search/">Search</a></li>
+                        <li class="nav-item"><a class="nav-link " href="/seller/contact_us/">Contact Us</a></li>
+                       
+                    </ul>
+                    
+                </div>
+            </div>
+        </nav>
+         </div>
+        {% endblock%}
